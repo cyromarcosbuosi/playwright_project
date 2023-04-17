@@ -1,0 +1,17 @@
+{
+  "name": "projeto_pessoal",
+  "version": "1.0.0",
+  "description": "teste api",
+  "main": "index.js",
+  "dependencies": {
+    "playwright": "^1.32.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.32.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cyro buosi",
+  "license": "ISC"
+}
