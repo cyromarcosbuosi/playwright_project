@@ -12,6 +12,7 @@ test.describe("Api testing suit", () => {
         await expect(response.status()).toEqual(200);
         await expect(fetchUsers.data.length).toEqual(10)
     })
+    
     test('create post', async ({ request }) => {
         const body = await request.post('/data/v1/post/create', {
             data: {
@@ -22,10 +23,25 @@ test.describe("Api testing suit", () => {
                 owner: "60d0fe4f5311236168a109f5"
             },
             headers: {
-                "app-id": "6112dc7c3f812e0d9b6679dd"
+                "app-id": "64514dba3ff02b2d6b09531b"
             }
         })
         await expect(body.status()).toEqual(200);
+    })
+
+    test('create a comment', async ({request})=> {
+        const response = await request.post('/data/v1/comment/create', {
+           data: {
+            message: "This is really cool!",
+            owner: "60d0fe4f5311236168a109df",
+            post: "60d21af267d0d8992e610b8d"
+           },
+        
+        headers: {
+            "app-id": "64514dba3ff02b2d6b09531b"
+        }  
+        })
+        await expect(response.status()).toEqual(200);
     })
 })
 
