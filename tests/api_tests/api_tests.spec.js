@@ -1,4 +1,7 @@
 const { test, expect } = require('@playwright/test');
+import * as dataFixtureComment from '../../fixtures/user_comment.json'
+import * as dataFixturePost from '../../fixtures/user_post.json'
+import * as appId from '../../fixtures/app_id.json'
 
 test.describe("Api testing suit", () => {
     test('get users', async ({ request }) => {
@@ -12,18 +15,18 @@ test.describe("Api testing suit", () => {
         await expect(response.status()).toEqual(200);
         await expect(fetchUsers.data.length).toEqual(10)
     })
-    
+
     test('create post', async ({ request }) => {
         const body = await request.post('/data/v1/post/create', {
             data: {
-                text: "this is a test",
-                image: "https://imagesvc.meredithcorp.io/v3/mm/image?q=60&c=sc&poi=%5B900%2C533%5D&w=2000&h=1333&url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F47%2F2021%2F03%2F12%2Fpomeranian-white-puppy-921029690-2000.jpg",
-                likes: 69,
-                tags: "aaa",
-                owner: "60d0fe4f5311236168a109f5"
+                text: dataFixturePost.text,
+                image: dataFixturePost.image,
+                likes: dataFixturePost.likes,
+                tags: dataFixturePost.tags,
+                owner: dataFixturePost.owner
             },
             headers: {
-                "app-id": "64514dba3ff02b2d6b09531b"
+                "app-id": appId.app_id
             }
         })
         await expect(body.status()).toEqual(200);
@@ -32,13 +35,13 @@ test.describe("Api testing suit", () => {
     test('create a comment', async ({request})=> {
         const response = await request.post('/data/v1/comment/create', {
            data: {
-            message: "This is really cool!",
-            owner: "60d0fe4f5311236168a109df",
-            post: "60d21af267d0d8992e610b8d"
+            message: dataFixtureComment.message,
+            owner: dataFixtureComment.owner,
+            post: dataFixtureComment.post
            },
         
         headers: {
-            "app-id": "64514dba3ff02b2d6b09531b"
+            "app-id": appId.app_id
         }  
         })
         await expect(response.status()).toEqual(200);
